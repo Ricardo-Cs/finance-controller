@@ -17,8 +17,13 @@ passport.use(new GoogleStrategy(
 
 const loginWithGoogle = (req, res) => {
     res.render('home');
-}
+};
+
+const googleLoginSucess = (req, res) => {
+    res.send('Sucesso!');
+};
 
 module.exports = {
-    loginWithGoogle
+    loginWithGoogle,
+    googleLoginSucess
 };
