@@ -1,6 +1,6 @@
 const express = require('express');
 const connectDbAndSyncModels = require('./app/database/config/sync');
-const router = require('./app/routes/user.routes');
+const router = require('./app/routes/routes');
 const app = express();
 
 connectDbAndSyncModels();
