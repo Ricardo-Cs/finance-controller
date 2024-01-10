@@ -8,13 +8,20 @@
 </head>
 
 <body>
-    <form action="/auth/login" method="post">
-        <!-- Adicione campos do formulário, se necessário -->
-        <!-- Exemplo: <input type="text" name="username" placeholder="Nome de usuário"> -->
-        <!-- Exemplo: <input type="password" name="password" placeholder="Senha"> -->
+    <form action="" method="get">
+        <label for="email">Email: </label>
+        <input type="email" name="email" placeholder="Email">
 
-        <button type="submit">enviar</button>
+        <label for="password">Senha: </label>
+        <input type="password" name="password" placeholder="Senha">
+
+        <button type="submit">Entrar</button>
     </form>
+    <span>Ou</span>
+
+    <div class="social-auth">
+        <a href="/auth/google">Entrar com google</a>
+    </div>
 </body>
 
 </html>
