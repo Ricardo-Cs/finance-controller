@@ -1,10 +1,10 @@
 const express = require('express');
 const ENV = require('./app/utils/env');
-const connectToDatabase = require('./app/database/dbconnect');
+const connectDbAndSyncModels = require('./app/database/config/sync');
 
+connectDbAndSyncModels();
 // Configura servidor
 const app = express();
-connectToDatabase();
 app.use('/public', express.static('public'));
 
 app.get('/', (req, res) => res.sendFile(__dirname + '/public/login.html'));
