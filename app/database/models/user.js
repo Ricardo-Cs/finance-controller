@@ -18,7 +18,12 @@ const User = sequelize.define('users', {
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,  // Permitir que seja nulo para usuários que fazem login com o Google
+    },
+    googleId: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: true,  // Permitir que seja nulo para usuários que fazem login com o Google
     }
 });
 
