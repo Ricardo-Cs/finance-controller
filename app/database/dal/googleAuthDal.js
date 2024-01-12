@@ -9,9 +9,7 @@ const googleAuthDal = {
                 },
                 defaults: {
                     name: oauthUser.displayName,
-                    accountId: oauthUser.id,
-                    provider: oauthUser.provider,
-                    photoURL: oauthUser.photos[0].value,
+                    googleId: oauthUser.id,
                 },
             });
 
