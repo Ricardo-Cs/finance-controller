@@ -17,7 +17,9 @@ routes.post('/login', passport.authenticate('local', { failureRedirect: '/' }), 
 });
 routes.get('/login/success', isAuthenticated, authController.localLoginSuccess);
 
-// Both
 routes.get('/logout', authController.logout);
+
+// Register 
+routes.post('/register', authController.registerUser);
 
 module.exports = routes;

@@ -9,7 +9,6 @@ const cors = require('cors');
 
 connectDbAndSyncModels();
 
-// Configura servidor
 app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));
 app.use(

@@ -8,7 +8,21 @@
 </head>
 
 <body>
+    <div id="errorMessage" style="color: red; display: none;"></div>
     <h1>Cadastro</h1>
+    <form action="/auth/register" method="post">
+        <label for="name">Nome: </label>
+        <input type="text" name="name" placeholder="Nome" required>
+
+        <label for="email">Email: </label>
+        <input type="email" name="email" placeholder="Email" required>
+
+        <label for="password">Senha: </label>
+        <input type="password" name="password" required>
+
+        <input type="submit" value="Cadastrar">
+
+    </form>
 </body>
 
 </html>

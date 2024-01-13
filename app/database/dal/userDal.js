@@ -1,6 +1,6 @@
 const User = require("../models/user");
 
-const findOneById = async (userId) => {
+const findOneUserById = async (userId) => {
     try {
         const user = await User.findOne({ where: { id: userId } });
         return user;
@@ -9,16 +9,27 @@ const findOneById = async (userId) => {
     }
 };
 
-const findOneByEmail = async (email) => {
+const findOneUserByEmail = async (email) => {
     try {
         const user = await User.findOne({ where: { email: email } });
         return user;
     } catch (error) {
-        console.error('Erro ao buscar id no banco: ', error);
+        console.error('Erro ao buscar email no banco: ', error);
+    }
+};
+
+const insertUser = async (user) => {
+    try {
+        await User.create(user);
+        return true;
+    } catch (error) {
+        console.error('Erro ao inserir usuário no banco: ', error);
+        return false;
     }
 };
 
 module.exports = {
-    findOneById,
-    findOneByEmail
+    findOneUserById,
+    findOneUserByEmail,
+    insertUser
 };

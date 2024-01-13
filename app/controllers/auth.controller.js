@@ -1,7 +1,7 @@
 const passport = require('passport');
 const ENV = require('../utils/env');
 const googleAuthDal = require('../database/dal/googleAuthDal');
-const { findOneByEmail } = require('../database/dal/userDal');
+const { findOneUserByEmail, insertUser } = require('../database/dal/userDal');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 let userProfile;
@@ -25,7 +25,7 @@ passport.use(new LocalStrategy(
     },
     async function (email, password, done) {
         try {
-            const user = await findOneByEmail(email);
+            const user = await findOneUserByEmail(email);
 
             if (!user) {
                 return done(null, false, { message: 'Usuário não encontrado.' });
@@ -54,10 +54,14 @@ const googleLoginSuccess = async (req, res) => {
     res.render('home', { user: userProfile });
 };
 
+const localLoginSuccess = (req, res) => {
+    res.render('home', { user: userProfile });
+};
+
 const logout = async (req, res) => {
     try {
         req.session.destroy((err) => {
-            console.log('session destroyed.');
+            console.log('Session destroyed.');
         });
         res.render('login');
     } catch (err) {
@@ -65,12 +69,26 @@ const logout = async (req, res) => {
     }
 };
 
-const localLoginSuccess = (req, res) => {
-    res.render('home', { user: userProfile });
+const registerUser = async (req, res) => {
+    const userData = req.body;
+    const userExists = await findOneUserByEmail(userData.email);
+
+    if (userExists) {
+        return res.status(400).send('E-mail já em uso. Escolha outro e-mail.');
+    }
+
+    const insertedUser = await insertUser(userData);
+
+    if (insertUser) {
+        res.render('login');
+        return console.log('Usuário criado com sucesso');
+    }
+
 };
 
 module.exports = {
     googleLoginSuccess,
     localLoginSuccess,
-    logout
+    logout,
+    registerUser
 };
