@@ -8,4 +8,8 @@ router.get('/', (req, res) => {
 
 router.use('/auth', auth);
 
+router.use((req, res) => {
+    res.render('notFound');
+});
+
 module.exports = router;

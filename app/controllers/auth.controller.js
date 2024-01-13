@@ -16,10 +16,6 @@ passport.use(new GoogleStrategy(
     }
 ));
 
-const loginWithGoogle = (req, res) => {
-    res.render('home');
-};
-
 const googleLoginSucess = async (req, res) => {
     const { failure, success } = await googleAuthDal.registerWithGoogle(userProfile);
     if (failure) console.log('Google user already exist in DB..');
@@ -28,6 +24,5 @@ const googleLoginSucess = async (req, res) => {
 };
 
 module.exports = {
-    loginWithGoogle,
     googleLoginSucess
 };
