@@ -4,11 +4,21 @@ const authController = require('../controllers/auth.controller');
 const passport = require('passport');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 
-routes.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+// Google auth
+routes.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 routes.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
     res.redirect('/auth/google/success');
 });
-routes.get('/google/success', isAuthenticated, authController.googleLoginSucess);
-routes.get('/google/signout', authController.googleSignout);
+routes.get('/google/success', isAuthenticated, authController.googleLoginSuccess);
+
+// Local auth
+routes.post('/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
+    res.redirect('login/success');
+});
+routes.get('/login/success', isAuthenticated, authController.localLoginSuccess);
+
+// Both
+routes.get('/logout', authController.logout);
+
 
 module.exports = routes;

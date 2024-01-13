@@ -1,7 +1,7 @@
 const passport = require('passport');
 const ENV = require('../utils/env');
 const googleAuthDal = require('../database/dal/googleAuthDal');
-const { findOneByUsername } = require('../database/dal/userDal');
+const { findOneByEmail } = require('../database/dal/userDal');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 let userProfile;
@@ -19,39 +19,44 @@ passport.use(new GoogleStrategy(
 ));
 
 passport.use(new LocalStrategy(
-    async function (username, password, done) {
+    {
+        usernameField: 'email',
+        passwordField: 'password'
+    },
+    async function (email, password, done) {
         try {
-            const user = await findOneByUsername(username);
+            const user = await findOneByEmail(email);
 
             if (!user) {
-                return done(null, false, { message: 'Usuário não encontrado' });
+                return done(null, false, { message: 'Usuário não encontrado.' });
             }
 
-            // Aqui você deve verificar a senha, por exemplo, usando bcrypt.compare
-            // ou alguma outra lógica de verificação de senha
+            if (user.googleId) {
+                return done(null, false, { message: 'Este usuário está associado a uma conta do Google.' })
+            }
+
             if (user.password !== password) {
-                return done(null, false, { message: 'Senha incorreta' });
+                return done(null, false, { message: 'Senha incorreta.' });
             }
 
-            // Se tudo estiver correto, retorne o usuário
+            userProfile = user;
             return done(null, user);
         } catch (error) {
-            // Trate o erro conforme necessário
             return done(error);
         }
     }
 ));
 
-const googleLoginSucess = async (req, res) => {
+const googleLoginSuccess = async (req, res) => {
     const { failure, success } = await googleAuthDal.registerWithGoogle(userProfile);
     if (failure) console.log('Google user already exist in DB..');
     else console.log('Registering new Google user..');
     res.render('home', { user: userProfile });
 };
 
-const googleSignout = async (req, res) => {
+const logout = async (req, res) => {
     try {
-        req.session.destroy(function (err) {
+        await req.session.destroy(function (err) {
             console.log('session destroyed.');
         });
         res.render('login');
@@ -60,7 +65,12 @@ const googleSignout = async (req, res) => {
     }
 };
 
+const localLoginSuccess = (req, res) => {
+    res.render('home', { user: userProfile });
+};
+
 module.exports = {
-    googleLoginSucess,
-    googleSignout
+    googleLoginSuccess,
+    localLoginSuccess,
+    logout
 };

@@ -9,9 +9,9 @@ const findOneById = async (userId) => {
     }
 };
 
-const findOneByUsername = async (username) => {
+const findOneByEmail = async (email) => {
     try {
-        const user = await User.findOne({ where: { name: username } });
+        const user = await User.findOne({ where: { email: email } });
         return user;
     } catch (error) {
         console.error('Erro ao buscar id no banco: ', error);
@@ -20,5 +20,5 @@ const findOneByUsername = async (username) => {
 
 module.exports = {
     findOneById,
-    findOneByUsername
+    findOneByEmail
 };

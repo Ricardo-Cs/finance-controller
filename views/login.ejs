@@ -8,12 +8,12 @@
 </head>
 
 <body>
-    <form action="" method="get">
+    <form action="/auth/login" method="POST">
         <label for="email">Email: </label>
-        <input type="email" name="email" placeholder="Email">
+        <input type="email" name="email" id="email" placeholder="Email" required>
 
         <label for="password">Senha: </label>
-        <input type="password" name="password" placeholder="Senha">
+        <input type="password" name="password" id="password" placeholder="Senha" required>
 
         <button type="submit">Entrar</button>
     </form>

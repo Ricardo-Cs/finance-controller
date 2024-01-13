@@ -5,6 +5,8 @@ const ENV = require('./app/utils/env');
 const passport = require('passport');
 const session = require('express-session');
 const app = express();
+const cors = require('cors');
+const { findOneById } = require('./app/database/dal/userDal');
 
 connectDbAndSyncModels();
 
@@ -18,15 +20,23 @@ app.use(
         secret: ENV.SESSION_SECRET
     })
 );
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function (user, cb) {
-    cb(null, user);
+    cb(null, user.id);
 });
 
-passport.deserializeUser(function (obj, cb) {
-    cb(null, obj);
+passport.deserializeUser(async (id, done) => {
+    try {
+        const user = await findOneById(id);
+        done(null, user);
+    } catch (error) {
+        done(error, null);
+    }
 });
 
 app.use(router);
