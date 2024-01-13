@@ -56,7 +56,7 @@ const googleLoginSuccess = async (req, res) => {
 
 const logout = async (req, res) => {
     try {
-        await req.session.destroy(function (err) {
+        req.session.destroy((err) => {
             console.log('session destroyed.');
         });
         res.render('login');

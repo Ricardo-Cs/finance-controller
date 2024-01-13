@@ -20,5 +20,4 @@ routes.get('/login/success', isAuthenticated, authController.localLoginSuccess);
 // Both
 routes.get('/logout', authController.logout);
 
-
 module.exports = routes;
