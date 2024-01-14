@@ -74,7 +74,7 @@ const registerUser = async (req, res) => {
     const userExists = await findOneUserByEmail(userData.email);
 
     if (userExists) {
-        return res.status(400).send('E-mail já em uso. Escolha outro e-mail.');
+        return res.render('register', { error: 'Ususário já existente' });
     }
 
     const insertedUser = await insertUser(userData);
@@ -83,7 +83,6 @@ const registerUser = async (req, res) => {
         res.render('login');
         return console.log('Usuário criado com sucesso');
     }
-
 };
 
 module.exports = {
