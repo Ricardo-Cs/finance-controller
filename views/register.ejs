@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <script src="../assets/js/script.js" defer></script>
+    <script type="module" src="../assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
+    <% if(message) { %>
+    <span class="errorMessage" style="color: red;"><%= message %></span>
+    <div class="progressBar"></div>
+    <% } %>
+
     <h1>Cadastro</h1>
     <form action="/auth/register" method="post">
         <label for="name">Nome: </label>
@@ -21,8 +27,8 @@
         <input type="password" name="password" required>
 
         <input type="submit" value="Cadastrar">
-        <div class="errorMessage"><%= error%></div>
     </form>
+
 </body>
 
 </html>

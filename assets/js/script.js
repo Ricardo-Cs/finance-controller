@@ -1,7 +1,3 @@
-const div = document.querySelector('.errorMessage');
+import { hideErrorMessage } from './popup.js';
 
-setTimeout(() => {
-    div.style.display = "none";
-}, 3000);
-
-console.log(div)
+hideErrorMessage();

@@ -74,7 +74,7 @@ const registerUser = async (req, res) => {
     const userExists = await findOneUserByEmail(userData.email);
 
     if (userExists) {
-        return res.render('register', { error: 'Ususário já existente' });
+        return res.render('register', { message: 'Usuário já existente' });
     }
 
     const insertedUser = await insertUser(userData);
