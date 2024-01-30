@@ -6,6 +6,7 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 let userProfile;
 
+// Passport login with google
 passport.use(new GoogleStrategy(
     {
         clientID: ENV.GOOGLE_CLIENT_ID,
@@ -18,6 +19,7 @@ passport.use(new GoogleStrategy(
     }
 ));
 
+// Local login
 passport.use(new LocalStrategy(
     {
         usernameField: 'email',
@@ -27,16 +29,12 @@ passport.use(new LocalStrategy(
         try {
             const user = await findOneUserByEmail(email);
 
-            if (!user) {
-                return done(null, false, { message: 'Usuário não encontrado.' });
+            if (!user || user.password !== password) {
+                return done(null, false, { message: 'Usuário ou senha incorretos' });
             }
 
             if (user.googleId) {
                 return done(null, false, { message: 'Este usuário está associado a uma conta do Google.' })
-            }
-
-            if (user.password !== password) {
-                return done(null, false, { message: 'Senha incorreta.' });
             }
 
             userProfile = user;
@@ -63,7 +61,7 @@ const logout = async (req, res) => {
         req.session.destroy((err) => {
             console.log('Session destroyed.');
         });
-        res.render('login');
+        res.render('login', { message: false });
     } catch (err) {
         res.status(400).send({ message: 'Failed to sign out user' });
     }
@@ -74,7 +72,7 @@ const registerUser = async (req, res) => {
     const userExists = await findOneUserByEmail(userData.email);
 
     if (userExists) {
-        return res.render('register', { message: 'Usuário já existente' });
+        return res.render('register', { message: 'Usuário já existente! Tente novamente.' });
     }
 
     const insertedUser = await insertUser(userData);

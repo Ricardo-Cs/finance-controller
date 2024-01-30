@@ -12,7 +12,7 @@ routes.get('/google/callback', passport.authenticate('google', { failureRedirect
 routes.get('/google/success', isAuthenticated, authController.googleLoginSuccess);
 
 // Local auth
-routes.post('/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
+routes.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureMessage: true }), (req, res) => {
     res.redirect('login/success');
 });
 routes.get('/login/success', isAuthenticated, authController.localLoginSuccess);

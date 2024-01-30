@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script type="module" src="../assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
+    <% if(message) { %>
+    <span class="errorMessage" style="color: red;"><%= message %></span>
+    <% } %>
+
     <form action="/auth/login" method="POST">
         <label for="email">Email: </label>
         <input type="email" name="email" placeholder="Email" required>
