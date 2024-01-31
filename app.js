@@ -24,6 +24,13 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Por padrão, message é false, assim não é necessário enviar { message: false } sempre que chamar uma view
+app.use(function (req, res, next) {
+    res.locals.errorMessage = false;
+    res.locals.successMessage = false;
+    next();
+});
+
 passport.serializeUser(function (user, cb) {
     cb(null, user);
 });

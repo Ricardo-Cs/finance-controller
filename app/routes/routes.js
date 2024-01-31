@@ -8,15 +8,19 @@ router.get('/', isAuthenticated, (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    let customMessage = false;
-    if (req.session.messages != undefined && req.session.messages.length != 0) {
-        customMessage = req.session.messages[0];
+    let errorMessage = null;
+
+    if (req.session.messages && req.session.messages.length > 0) {
+        errorMessage = req.session.messages[0];
+
+        req.session.messages = [];
     }
-    res.render('login', { message: customMessage });
+
+    res.render('login', { errorMessage });
 });
 
 router.get('/register', (req, res) => {
-    res.render('register', { message: false });
+    res.render('register');
 });
 
 router.use('/auth', auth);

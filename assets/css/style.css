@@ -1,23 +1,22 @@
-@keyframes slideInFromTop {
-    0% {
-        transform: translateY(-50%);
-    }
-
-    100% {
-        transform: translateY(10);
-    }
+.message {
+    position: absolute;
+    top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 300px;
+    z-index: 999;
 }
 
 .errorMessage {
-    position: absolute;
-    top: 10px;
     background-color: #ffcccc;
-    padding: 10px;
     border: 1px solid #ff0000;
-    border-radius: 4px;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
-    max-width: 300px;
     color: #ff0000;
-    animation: slideInFromTop 0.5s ease;
-    z-index: 999;
+}
+
+.successMessage {
+    background-color: #ccffcc;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    color: #00ff00;
 }

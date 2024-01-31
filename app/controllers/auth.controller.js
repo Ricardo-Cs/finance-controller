@@ -61,7 +61,7 @@ const logout = async (req, res) => {
         req.session.destroy((err) => {
             console.log('Session destroyed.');
         });
-        res.render('login', { message: false });
+        res.render('login');
     } catch (err) {
         res.status(400).send({ message: 'Failed to sign out user' });
     }
@@ -72,14 +72,13 @@ const registerUser = async (req, res) => {
     const userExists = await findOneUserByEmail(userData.email);
 
     if (userExists) {
-        return res.render('register', { message: 'Usuário já existente! Tente novamente.' });
+        return res.render('register', { errorMessage: 'Usuário já existente! Tente novamente.' });
     }
 
     const insertedUser = await insertUser(userData);
 
-    if (insertUser) {
-        res.render('login');
-        return console.log('Usuário criado com sucesso');
+    if (insertedUser) {
+        return res.render('login', { successMessage: 'Usuário criado com sucesso!' });
     }
 };
 

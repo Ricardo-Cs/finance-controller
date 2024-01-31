@@ -1,7 +1,10 @@
-const div = document.querySelector('.errorMessage');
+const span = document.querySelector('.message');
 
 export const hideErrorMessage = () => {
     setTimeout(() => {
-        div.style.display = 'none';
-    }, 2000);
+        if (span && span.parentNode) {
+            // Remove permanentemente o elemento do DOM
+            span.parentNode.removeChild(span);
+        }
+    }, 3000);
 };
