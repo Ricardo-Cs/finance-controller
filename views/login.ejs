@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <script type="module" src="../assets/js/script.js" defer></script>
-</head>
+<%- include('components/head-component.ejs', {title: 'Login'}) %>
 
 <body>
-    <% if(errorMessage) { %>
-    <span class="message errorMessage"><%= errorMessage %></span>
-    <% } %>
-
-    <% if(successMessage) { %>
-    <span class="message successMessage"><%= successMessage %></span>
-    <% } %>
+    <%- include('components/message-component.ejs') %>
 
     <h1>Login</h1>
     <form action="/auth/login" method="POST">

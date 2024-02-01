@@ -53,7 +53,7 @@ const googleLoginSuccess = async (req, res) => {
 };
 
 const localLoginSuccess = (req, res) => {
-    res.render('home', { user: userProfile });
+    res.render('home', { user: userProfile.dataValues });
 };
 
 const logout = async (req, res) => {
