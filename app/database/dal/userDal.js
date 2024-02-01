@@ -1,3 +1,4 @@
+const { hashPassword } = require("../../utils/crypt");
 const User = require("../models/user");
 
 const findOneUserById = async (userId) => {
@@ -20,6 +21,8 @@ const findOneUserByEmail = async (email) => {
 
 const insertUser = async (user) => {
     try {
+        const passwordHash = await hashPassword(user.password.toLowerCase());
+        user.password = passwordHash;
         await User.create(user);
         return true;
     } catch (error) {

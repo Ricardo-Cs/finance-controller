@@ -2,6 +2,7 @@ const passport = require('passport');
 const ENV = require('../utils/env');
 const googleAuthDal = require('../database/dal/googleAuthDal');
 const { findOneUserByEmail, insertUser } = require('../database/dal/userDal');
+const { comparePassword } = require('../utils/crypt');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 let userProfile;
@@ -29,7 +30,7 @@ passport.use(new LocalStrategy(
         try {
             const user = await findOneUserByEmail(email);
 
-            if (!user || user.password !== password) {
+            if (!user || !comparePassword(password, user.password)) {
                 return done(null, false, { message: 'Usuário ou senha incorretos' });
             }
 
