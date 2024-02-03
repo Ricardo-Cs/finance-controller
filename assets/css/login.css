@@ -1,0 +1,39 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth-form {
+    width: 300px;
+    padding: 16px;
+    border: 1px solid #ccc;
+}
+
+/* Line separator in login */
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #333;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #333;
+}
+
+.separator::before {
+    margin-right: .25em;
+}
+
+.separator::after {
+    margin-left: .25em;
+}
+
+.separator span {
+    padding: 0 10px;
+}

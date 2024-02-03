@@ -4,29 +4,27 @@
 <%- include('components/head-component.ejs', {title: 'Cadastro'}) %>
 
 <body>
-    <% if(errorMessage) { %>
-    <span class="message errorMessage"><%= errorMessage %></span>
-    <% } %>
+    <%- include('components/message-component.ejs') %>
 
-    <% if(successMessage) { %>
-    <span class="message errorMessage"><%= successMessage %></span>
-    <% } %>
+    <main class="auth-container">
+        <div class="auth-form">
+            <h1>Cadastro</h1>
+            <form action="/auth/register" method="post">
+                <label for="name">Nome: </label>
+                <input type="text" name="name" placeholder="Nome" required>
 
-    <h1>Cadastro</h1>
-    <form action="/auth/register" method="post">
-        <label for="name">Nome: </label>
-        <input type="text" name="name" placeholder="Nome" required>
+                <label for="email">Email: </label>
+                <input type="email" name="email" placeholder="Email" required>
 
-        <label for="email">Email: </label>
-        <input type="email" name="email" placeholder="Email" required>
+                <label for="password">Senha: </label>
+                <input type="password" name="password" placeholder="Senha" required>
 
-        <label for="password">Senha: </label>
-        <input type="password" name="password" placeholder="Senha" required>
+                <input type="submit" value="Cadastrar">
+            </form>
 
-        <input type="submit" value="Cadastrar">
-    </form>
-
-    <a href="/">Retornar ao login</a>
+            <a href="/">Retornar ao login</a>
+        </div>
+    </main>
 
 </body>
 

@@ -30,7 +30,7 @@ passport.use(new LocalStrategy(
         try {
             const user = await findOneUserByEmail(email);
 
-            if (!user || !comparePassword(password, user.password)) {
+            if (!user || !(await comparePassword(password, user.password))) {
                 return done(null, false, { message: 'Usuário ou senha incorretos' });
             }
 
