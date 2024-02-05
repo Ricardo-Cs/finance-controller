@@ -9,31 +9,22 @@
     width: 300px;
     padding: 16px;
     border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-/* Line separator in login */
-.separator {
-    display: flex;
-    align-items: center;
+.form-title {
     text-align: center;
-    color: #333;
 }
 
-.separator::before,
-.separator::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #333;
+.auth-form form {
+    display: flex;
+    flex-direction: column;
 }
 
-.separator::before {
-    margin-right: .25em;
-}
-
-.separator::after {
-    margin-left: .25em;
-}
-
-.separator span {
-    padding: 0 10px;
+.form-button {
+    display: inline-block;
+    padding: 5px 10px;
+    width: 50%;
+    margin: 15px auto 0 auto;
+    border-radius: 20px;
 }
