@@ -13,17 +13,19 @@ const googleAuthDal = {
                 },
             });
 
-            if (!created) {
-                // Usuário já registrado
-                return { failure: { message: 'User already registered.' } };
+            if (created) {
+                console.log('Usuário cadastrado.');
+            } else {
+                console.log('Usuário já cadastrado. Logando...');
             }
 
-            return { success: { message: 'User registered.' } };
+            return { success: { user } };
         } catch (error) {
             console.error('Error registering with Google:', error);
             return { failure: { message: 'Error registering with Google.' } };
         }
     },
 };
+
 
 module.exports = googleAuthDal;

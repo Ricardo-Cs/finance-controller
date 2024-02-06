@@ -5,7 +5,7 @@ const passport = require('passport');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 
 // Google auth
-routes.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+routes.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], prompt: 'select_account' }));
 routes.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
     res.redirect('/auth/google/success');
 });

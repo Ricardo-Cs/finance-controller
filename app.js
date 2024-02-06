@@ -3,6 +3,7 @@ const connectDbAndSyncModels = require('./app/database/config/sync');
 const router = require('./app/routes/routes');
 const ENV = require('./app/utils/env');
 const passport = require('passport');
+require('./app/services/strategies/passportStrategies');
 const session = require('express-session');
 const app = express();
 const cors = require('cors');
