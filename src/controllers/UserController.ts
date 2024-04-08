@@ -12,8 +12,13 @@ export class UserController {
         this.userService = new UserService(this.userRepository);
     }
 
-    async insert(req: Request, res: Response, next: NextFunction) {
+    async insert(req: Request, res: Response) {
         const result = await this.userService.insert(req.body);
         return res.status(result.status).json({ message: result.message });
+    }
+
+    async selectAll(req: Request, res: Response) {
+        const result = await this.userService.selectAll();
+        return res.status(result.status).json({ message: result.message, users: result.users });
     }
 };
