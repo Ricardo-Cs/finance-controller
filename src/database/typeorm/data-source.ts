@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { config } from "dotenv";
 import { User } from "./entities/User";
+import { Card } from "./entities/Card";
 
 config();
 
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
     database: process.env.PG_DATABASE,
     synchronize: true,
     logging: true,
-    entities: [User],
+    entities: ["src/database/typeorm/entities/**/*.ts"],
     subscribers: [],
     migrations: [],
 });

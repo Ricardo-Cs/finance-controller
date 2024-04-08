@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Card } from "./Card";
 
 @Entity()
 export class User {
@@ -15,5 +16,11 @@ export class User {
     password!: string;
 
     @Column()
+    balance!: number;
+
+    @Column()
     is_active!: boolean;
+
+    @OneToMany(() => Card, (card) => card.user)
+    cards!: Card[];
 }
