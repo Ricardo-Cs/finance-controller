@@ -1,9 +1,9 @@
 import { pbkdf2Sync } from "crypto";
-import { ICrypt } from "../ICrypt";
+import { ICrypto } from "../ICrypto";
 import { config } from "dotenv";
 config();
 
-export class Crypto implements ICrypt {
+export class Crypto implements ICrypto {
 
     encrypt(password: string) {
         const hash = pbkdf2Sync(password, 'salt' + process.env.PRIVATE_KEY, 1000, 64, 'sha512').toString('hex');

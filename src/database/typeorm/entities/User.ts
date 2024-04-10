@@ -15,11 +15,8 @@ export class User {
     @Column({ length: 128 })
     password!: string;
 
-    @Column()
+    @Column({ default: 0 })
     balance!: number;
-
-    @Column()
-    is_active!: boolean;
 
     @OneToMany(() => Card, (card) => card.user)
     cards!: Card[];

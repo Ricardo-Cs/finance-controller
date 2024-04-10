@@ -12,4 +12,8 @@ routes.post('/', (req, res) => {
     userController.insert(req, res);
 });
 
+routes.post('/login', (req, res) => {
+    userController.login(req, res);
+});
+
 export default routes;
