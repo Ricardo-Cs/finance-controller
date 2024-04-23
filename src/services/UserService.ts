@@ -27,7 +27,7 @@ export default class UserService {
         const insertUser: User = await this.repository.insert(user);
 
         if (!insertUser) {
-            return { status: 400, message: "Usuário não foi criado!." };
+            return { status: 400, message: "Erro ao criar usuário, tente novamente!." };
         };
 
         return { status: 201, message: "Usuário criado!" };

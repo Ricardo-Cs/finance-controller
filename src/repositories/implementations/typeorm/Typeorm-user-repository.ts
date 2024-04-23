@@ -30,5 +30,4 @@ export class TypeormUserRepository implements IUserRepository {
         await this.typeorm.delete({ id: id });
         return;
     }
-
 }
