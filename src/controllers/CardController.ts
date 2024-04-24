@@ -24,9 +24,9 @@ export class CardController {
 
     async update(req: Request, res: Response) {
         const body = req.body;
-        const { user, ...dataToUpdate } = body;
+        const { card, ...dataToUpdate } = body;
 
-        const result = await this.cardService.update(user, dataToUpdate);
+        const result = await this.cardService.update(card, dataToUpdate);
         return res.status(result.status).json({ message: result.message });
     }
 }

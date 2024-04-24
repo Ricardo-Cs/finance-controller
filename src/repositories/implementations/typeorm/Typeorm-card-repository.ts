@@ -22,13 +22,17 @@ export class TypeormCardRepository implements ICardRepository {
         });
     }
 
-    async update(userId: number, dataToUpdate: any) {
-        const updateCard = await this.typeorm.createQueryBuilder()
-            .update(Card)
-            .set(dataToUpdate)
-            .where("user_id_fk = :id", { id: userId })
-            .execute()
+    async update(cardId: number, dataToUpdate: any) {
+        const cardToUpdate: any = await this.typeorm.findOne({
+            where: {
+                id: cardId
+            }
+        });
 
-        return updateCard.affected;
+        Object.assign(cardToUpdate, dataToUpdate);
+
+        const updateResult = await this.typeorm.save(cardToUpdate);
+
+        return updateResult;
     }
 }

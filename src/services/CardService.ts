@@ -34,8 +34,8 @@ export class CardService {
         return { status: 200, cards: cards };
     }
 
-    async update(userId: number, dataToUpdate: any) {
-        const updatedCard = await this.repository.update(userId, dataToUpdate);
+    async update(cardId: number, dataToUpdate: any) {
+        const updatedCard = await this.repository.update(cardId, dataToUpdate);
 
         if (!updatedCard) {
             return { status: 400, message: "Erro ao atualizar tabela!" };
