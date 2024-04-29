@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 import { Invoice } from "./Invoice";
+import { DebitPurchase } from "./DebitPurchase";
 
 @Entity()
 export class Card {
@@ -22,4 +23,7 @@ export class Card {
 
     @OneToMany(() => Invoice, (invoice) => invoice.card)
     invoices!: Invoice[];
+
+    @OneToMany(() => DebitPurchase, (debit_purchase) => debit_purchase.card)
+    debit_purchases!: DebitPurchase[];
 }

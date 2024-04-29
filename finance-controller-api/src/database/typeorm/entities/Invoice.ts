@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Purchase } from "./Purchase";
+import { CreditPurchase } from "./CreditPurchase";
 import { Card } from "./Card";
 
 @Entity()
@@ -20,6 +20,6 @@ export class Invoice {
     @JoinColumn({ name: "card_id_fk" })
     card!: Card;
 
-    @OneToMany(() => Purchase, (purchase) => purchase.invoice)
-    purchases!: Purchase[];
+    @OneToMany(() => CreditPurchase, (credit_purchase) => credit_purchase.invoice)
+    purchases!: CreditPurchase[];
 };

@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Invoice } from "./Invoice";
 
-@Entity()
-export class Purchase {
+@Entity({ name: "credit_purchase" })
+export class CreditPurchase {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -11,6 +11,9 @@ export class Purchase {
 
     @Column()
     amount!: number;
+
+    @Column({ type: "date" })
+    date!: Date;
 
     @ManyToOne(() => Invoice, (invoice) => invoice.purchases)
     @JoinColumn({ name: "invoice_id_fk" })
