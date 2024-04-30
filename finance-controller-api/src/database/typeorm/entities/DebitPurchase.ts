@@ -13,7 +13,7 @@ export class DebitPurchase {
     amount!: number;
 
     @Column({ type: "date" })
-    date!: Date;
+    date!: string;
 
     @ManyToOne(() => Card, (card) => card.debit_purchases)
     @JoinColumn({ name: "card_id_fk" })
