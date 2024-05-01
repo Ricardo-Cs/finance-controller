@@ -15,6 +15,9 @@ export class DebitPurchase {
     @Column({ type: "date" })
     date!: string;
 
+    @Column()
+    type!: string;
+
     @ManyToOne(() => Card, (card) => card.debit_purchases)
     @JoinColumn({ name: "card_id_fk" })
     card!: Card;

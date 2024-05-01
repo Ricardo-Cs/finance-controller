@@ -15,6 +15,9 @@ export class CreditPurchase {
     @Column({ type: "date" })
     date!: Date;
 
+    @Column()
+    type!: string;
+
     @ManyToOne(() => Invoice, (invoice) => invoice.purchases)
     @JoinColumn({ name: "invoice_id_fk" })
     invoice!: Invoice;

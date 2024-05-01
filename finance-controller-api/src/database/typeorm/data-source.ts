@@ -1,6 +1,5 @@
 import { DataSource } from "typeorm";
 import { config } from "dotenv";
-import { CardSubscriber } from "./subscribers/CardSubscriber";
 
 config();
 
@@ -14,7 +13,7 @@ export const AppDataSource = new DataSource({
     synchronize: false,
     logging: false,
     entities: ["src/database/typeorm/entities/**/*.ts"],
-    subscribers: [CardSubscriber]
+    subscribers: ["src/database/typeorm/subscribers/**/*.ts"]
 });
 
 export const initializeDatabase = () => {
