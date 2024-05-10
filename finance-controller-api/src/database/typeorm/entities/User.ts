@@ -1,5 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Card } from "./Card";
+import { DebitPurchase } from "./DebitPurchase";
+import { CreditPurchase } from "./CreditPurchase";
 
 @Entity()
 export class User {
@@ -20,4 +22,10 @@ export class User {
 
     @OneToMany(() => Card, (card) => card.user)
     cards!: Card[];
+
+    @OneToMany(() => DebitPurchase, (debitPurchase) => debitPurchase.user)
+    debit_purchases!: DebitPurchase[];
+
+    @OneToMany(() => CreditPurchase, (creditPurchase) => creditPurchase.user)
+    credit_purchases!: CreditPurchase[];
 }

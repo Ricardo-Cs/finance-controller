@@ -1,5 +1,7 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Card } from "./Card";
+import { PurchaseCategory } from "./PurchaseCategory";
+import { User } from "./User";
 
 @Entity({ name: "debit_purchase" })
 export class DebitPurchase {
@@ -15,10 +17,15 @@ export class DebitPurchase {
     @Column({ type: "date" })
     date!: string;
 
-    @Column()
-    type!: string;
-
     @ManyToOne(() => Card, (card) => card.debit_purchases)
     @JoinColumn({ name: "card_id_fk" })
     card!: Card;
+
+    @ManyToOne(() => User, (user) => user.debit_purchases)
+    @JoinColumn({ name: "user_id_fk" })
+    user!: User;
+
+    @ManyToMany(() => PurchaseCategory)
+    @JoinTable()
+    categories!: PurchaseCategory[];
 };

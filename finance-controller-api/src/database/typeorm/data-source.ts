@@ -10,8 +10,8 @@ export const AppDataSource = new DataSource({
     username: process.env.PG_USERNAME,
     password: process.env.PG_PASSWORD,
     database: process.env.PG_DATABASE,
-    synchronize: false,
-    logging: false,
+    synchronize: true,
+    logging: true,
     entities: ["src/database/typeorm/entities/**/*.ts"],
     subscribers: ["src/database/typeorm/subscribers/**/*.ts"]
 });
