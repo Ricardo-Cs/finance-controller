@@ -1,4 +1,4 @@
-import { api } from "../utils/api";
+import { apiUrl } from "../utils/apiUrl";
 
 export interface createUserData {
     full_name: string,
@@ -7,13 +7,13 @@ export interface createUserData {
 };
 
 const handleCreateUser = async (data: createUserData) => {
-    const response = await api.post('/user', {
+    const response = await apiUrl.post('/user', {
         full_name: data.full_name,
         email: data.email,
         password: data.password
     });
 
-    console.log({ status: response.status, message: response.data.message });
+    return { status: response.status, message: response.data.message };
 };
 
 export default handleCreateUser;
