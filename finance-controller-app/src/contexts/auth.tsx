@@ -12,7 +12,6 @@ export const AuthProvider = ({ children }: any) => {
 
     if (token) {
       setIsLogged(true)
-      console.log(isLogged);
     }
   }, []);
 

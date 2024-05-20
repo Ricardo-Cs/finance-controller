@@ -10,7 +10,7 @@ function Home() {
 
     return (
         <div>
-            <span>Home</span>
+            <h1 className="text-3xl font-bold underline">Home</h1>
             <hr />
             <span onClick={handleSignOut}>Sair</span>
         </div>
