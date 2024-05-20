@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import loginUser from "../../api/loginUser";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import popUp from "../../components/popup/popUp";
+import useAuth from "../../hooks/useAuth";
 
 function Login() {
+    const { signIn }: any = useAuth();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -12,19 +12,14 @@ function Login() {
     const handleSubmit = async (event: any) => {
         event.preventDefault();
 
-        try {
-            const response = await loginUser({ email, password });
+        const res = await signIn({ email: email, password: password });
 
-            if (!response || response.status !== 200) {
-                console.error('Login failed:');
-                return;
-            }
-
-            localStorage.setItem('token', response.token);
-            navigate('/');
-        } catch (error) {
-            console.error('Error during login:', error);
+        if (res) {
+            console.log(res);
+            return;
         }
+
+        navigate("/");
     };
 
     return (
