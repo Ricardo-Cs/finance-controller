@@ -6,12 +6,17 @@ export interface loginData {
 }
 
 async function loginUser(data: loginData) {
-    const response = await apiUrl.post('/user/login', {
+    return await apiUrl.post('/user/login', {
         email: data.email,
         password: data.password
-    });
-
-    return { status: response.status, token: response.data.token };
+    })
+        .then(response => {
+            return { status: response.status, token: response.data.token };
+        })
+        .catch(function (error) {
+            console.error('Login error:', error);
+            console.log(error)
+        });
 }
 
 export default loginUser;

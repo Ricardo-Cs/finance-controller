@@ -63,7 +63,7 @@ function Login() {
                         </div>
 
                         <div className="mt-2">
-                            <input type="text"
+                            <input type="password"
                                 name="password"
                                 onChange={(e) => setPassword(e.target.value)}
                                 required

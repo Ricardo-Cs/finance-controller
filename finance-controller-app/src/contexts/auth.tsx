@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import loginUser, { loginData } from "../api/loginUser";
 import popUp from "../components/popup/popUp";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
 
@@ -19,8 +20,12 @@ export const AuthProvider = ({ children }: any) => {
     const response = await loginUser(loginData);
 
     if (!response || response.status !== 200) {
-      popUp('error', 'Erro ao fazer login');
-      return "Erro";
+      // popUp('error', 'Erro ao fazer login');
+      toast.error("E-mail ou senha incorretos! Tente novamente", {
+        autoClose: 3000,
+        position: "top-center"
+      });
+      return;
     }
 
     localStorage.setItem('token', response.token);

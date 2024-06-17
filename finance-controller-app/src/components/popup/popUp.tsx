@@ -1,6 +1,8 @@
 function popUp(type: string, message: string) {
     return (
-        console.log(message)
+        <div>
+            <span>Erro!</span>
+        </div>
     );
 }
 
