@@ -8,17 +8,19 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [load, setLoad] = useState(false);
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
 
+        setLoad(true);
         const res = await signIn({ email: email, password: password });
 
         if (res) {
-            console.log(res);
             return;
         }
 
+        setLoad(false);
         navigate("/");
     };
 
@@ -71,11 +73,15 @@ function Login() {
                         </div>
                     </div>
 
-
                     <div>
                         <button
-                            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            Entrar
+                            disabled={load}
+                            className="signButton flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            <span>Entrar</span>
+                            <div
+                                className="hidden inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+                                role="status">
+                            </div>
                         </button>
                     </div>
                 </form>

@@ -1,0 +1,7 @@
+.signButton:disabled span {
+    display: none;
+}
+
+.signButton:disabled div {
+    display: block;
+}
