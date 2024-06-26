@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { IUserRepository } from "../repositories/interfaces/IUserRepository";
 import UserService from "../services/UserService";
 import { TypeormUserRepository } from "../repositories/implementations/typeorm/Typeorm-user-repository";
@@ -33,5 +33,11 @@ export class UserController {
     async login(req: Request, res: Response) {
         const result = await this.userService.login(req.body);
         return res.status(result.status).json({ message: result.message, token: result.token });
+    }
+
+    // req: any é um quebra-galho, deve ser ajeitado depois
+    async selectById(req: any, res: Response, next: NextFunction) {
+        const result = await this.userService.selectById(req.id as number);
+        return res.status(result.status).json({ user: result.user, error: result.error });
     }
 };

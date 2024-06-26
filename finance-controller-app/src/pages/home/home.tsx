@@ -1,19 +1,55 @@
+import getUserData from "../../api/getUser";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-// import useAuth from "../../hooks/useAuth";
+import getUserToken from "../../utils/getUserToken";
+import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
+
+interface User {
+    id: number;
+    full_name: string;
+    email: string;
+    password: string;
+    balance: number
+}
 
 function Home() {
-    // const { signOut }: any = useAuth();
+    const { signOut }: any = useAuth();
+    const [data, setData] = useState<User | null>(null);
 
-    // const handleSignOut = async () => {
-    //     await signOut();
-    // }
+    useEffect(() => {
+        async function userProfile() {
+            const token = getUserToken();
+            const userData = await getUserData(token);
+            if (userData) {
+                setData(userData.user);
+            }
+        }
+
+        userProfile();
+    }, []);
+
+    const handleSignOut = async () => {
+        await signOut();
+    }
 
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
-            {/* <span onClick={handleSignOut}>Sair</span> */}
-            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem adipisci minus incidunt perspiciatis ut accusantium iste, quo qui laboriosam eligendi blanditiis molestiae amet omnis! Maxime, eos? Doloribus deleniti aspernatur praesentium.</span>
+
+            <span className="underline" onClick={handleSignOut}>sair</span>
+            <span>
+                {data ? ( // Conditionally render user data
+                    <>
+                        <p>Id: {data.id}</p>
+                        <p>Full Name: {data.full_name}</p>
+                        <p>Email: {data.email}</p>
+                        <p>balance: {data.balance}</p>
+                    </>
+                ) : (
+                    <p>Loading user data...</p> // Or display a suitable message
+                )}
+            </span>
             <Footer />
         </div>
     )

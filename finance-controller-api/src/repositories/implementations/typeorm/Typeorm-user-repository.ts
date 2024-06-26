@@ -26,6 +26,14 @@ export class TypeormUserRepository implements IUserRepository {
         });
     }
 
+    async selectById(id: number) {
+        return await this.typeorm.findOne({
+            where: {
+                id
+            }
+        });
+    }
+
     async delete(id: number) {
         await this.typeorm.delete({ id: id });
         return;

@@ -60,4 +60,14 @@ export default class UserService {
 
         return { status: 200, token: token };
     }
+
+    async selectById(id: number) {
+        try {
+            const userExists = await this.repository.selectById(id);
+
+            return { status: 200, user: userExists };
+        } catch (error) {
+            return { status: 400, error: error };
+        }
+    }
 }
